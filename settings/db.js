@@ -1,13 +1,14 @@
-const mysql = require('mysql');
-const {dbHost, dbPass, dbPort, dbUser, dbLimit} = require('./environments');
+import mysql from 'mysql';
+import util from 'util';
+import {db} from './environments';
 
-mysql.createPool({
-    host: dbHost,
-    port: dbPort,
-    user: dbUser,
-    password: dbPass,
+const pool = mysql.createPool({
+    host: db.host,
+    port: db.port,
+    user: db.user,
+    password: db.pass,
     database: 'cross_country_db',
-    connectionLimit: dbLimit,
+    connectionLimit: db.limit
 })
 
 pool.getConnection((err, connection)=>{
@@ -22,5 +23,7 @@ pool.getConnection((err, connection)=>{
         connection.release();
     return;
 })
+
+pool.query = util.promisify(pool.query);
 
 module.exports = pool;
