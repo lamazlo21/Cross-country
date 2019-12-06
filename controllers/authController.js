@@ -1,5 +1,9 @@
 import db from '../settings/db';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import {secret} from '../settings/environments';
+import {options} from '../settings/jwt';
+
 const saltRounds = 10;
 
 const registerUserQuery = 'INSERT INTO Uzytkownik (LOGIN_UZYTKOWNIK, IMIE_UZYTKOWNIK, NAZWISKO_UZYTKOWNIK,' +
@@ -8,13 +12,16 @@ const registerUserQuery = 'INSERT INTO Uzytkownik (LOGIN_UZYTKOWNIK, IMIE_UZYTKO
 
 const doesUserExistQuery = 'SELECT LOGIN_UZYTKOWNIK FROM Uzytkownik WHERE LOGIN_UZYTKOWNIK = ?';
 
+
+
 export default{
         async loginUser(req, res, next){
-            try{
-                const {login, pass} = req.body;
-
-            }catch(err){
+            try {
+                const token = await jwt.sign({log: req.login}, secret, options);
+                res.send({token});
+            }catch(err) {
                 console.error(err);
+                res.send('Wystąpił problem podczas logowania.')
             }
         },
 
@@ -23,17 +30,16 @@ export default{
         try {
             const {login, first_name, last_name, birth_date, pass} = req.body;
             const user = await db.query(doesUserExistQuery, [login]);
-            if(!user) {
+            if(user.length == 0) {
                 const hashed_pass = await bcrypt.hash(pass, saltRounds);
                 await db.query(registerUserQuery, [login, first_name, last_name, birth_date, hashed_pass, user_type]);
+                res.send('Użytkownik został pomyślnie zarejestrowany');
             }else {
-                res.end('Użytkownik o podanym loginie już istnieje.');
+                res.send('Użytkownik o podanym loginie już istnieje.');
             }
-        }catch(err){
-            console.error(err)
-            res.end('Błąd! Użytkownik nie został zarejestrowany');
-        }finally {
-            res.end('Użytkownik został pomyślnie zarejestrowany');
+        }catch(err) {
+            console.error(err);
+            res.send('Błąd! Użytkownik nie został zarejestrowany');
         }
     }
 }

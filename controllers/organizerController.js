@@ -1,6 +1,6 @@
 import db from '../settings/db';
 
-const addRunQuery = 'INSERT INTO Bieg (ID_BIEG, DATA_BIEG, ID_TRASA, LOGIN_UZYTKOWNIK, NAZWA_BIEG) VALUES (?, ?, ?, ?, ?)';;
+const addRunQuery = 'INSERT INTO Bieg (DATA_BIEG, ID_TRASA, LOGIN_UZYTKOWNIK, NAZWA_BIEG) VALUES (?, ?, ?, ?, ?)';;
 
 const editRunQuery ='UPDATE Bieg SET NAZWA_BIEG = ? WHERE ID_BIEG = 1 ';
 

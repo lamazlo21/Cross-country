@@ -8,5 +8,6 @@ module.exports = {
       user: process.env.DB_USER,
       host: process.env.DB_HOST,
       limit: process.env.DB_LIMIT,
-  }
+  },
+  secret: process.env.JWT_SECRET
 };
