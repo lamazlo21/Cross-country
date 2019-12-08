@@ -1,16 +1,13 @@
 import db from '../settings/db';
-
-const sendMessageQuery = 'INSERT INTO Wiadomosc (LOGIN_NADAWCA, LOGIN_ODBIORCA, TRESC_WIADOMOSC) VALUES (?, ?, ?)';
-
-const getMessagesQuery = 'SELECT DATA_WIADOMOSC, TRESC_WIADOMOSC FROM Wiadomosc WHERE LOGIN_ODBIORCA = ? AND LOGIN_NADAWCA = ?';
-
-const getSendersQuery = 'SELECT DISTINCT LOGIN_NADAWCA, STATUS_WIADOMOSC FROM Wiadomosc WHERE LOGIN_ODBIORCA = ?';
+import {sendMessageQuery, getMessagesQuery, getSendersQuery} from '../settings/queries';
 
 export default{
     async sendMessage(req, res, next){
         try{
-            const {sender, receiver, content} = req.body;
-            await db.query(sendMessageQuery, [sender, receiver, content]);
+            const {content} = req.body;
+            const {receiver} = req.params;
+            const {login} = req.user[0];
+            await db.query(sendMessageQuery, [login, receiver, content]);
             res.end();
         }catch(err){
             console.error(err);
@@ -20,8 +17,9 @@ export default{
 
     async getMessages(req, res, next){
         try{
-            const {sender, receiver} = req.body;
-            const messages = await db.query(getMessagesQuery, [receiver, sender]);
+            const {login} = req.user[0];
+            const {sender} = req.params;
+            const messages = await db.query(getMessagesQuery, [login, sender]);
             res.send(messages);
         }catch(err){
             console.error(err);
@@ -31,8 +29,8 @@ export default{
 
     async getSenders(req, res, next){
         try{
-            const {receiver} = req.body;
-            const senders = await db.query(getSendersQuery, [receiver]);
+            const {login} = req.user[0];
+            const senders = await db.query(getSendersQuery, [login]);
             res.send(senders);
         }catch(err){
             console.error(err);

@@ -1,31 +1,36 @@
 import db from '../settings/db';
-
-const addRunQuery = 'INSERT INTO Bieg (DATA_BIEG, ID_TRASA, LOGIN_UZYTKOWNIK, NAZWA_BIEG) VALUES (?, ?, ?, ?, ?)';;
-
-const editRunQuery ='UPDATE Bieg SET NAZWA_BIEG = ? WHERE ID_BIEG = 1 ';
+import {addRunQuery, editRunQuery} from '../settings/queries';
 
 export default{
     async addRun(req, res, next){
         try{
-            const {id_bieg, data_bieg, id_trasa, login, name} = req.body;
-            await db.query(addRunQuery, [id_bieg, data_bieg, id_trasa, login, name]);
-        }catch(err){
+            const {data_bieg, id_trasa, name} = req.body;
+            const {login, type} = req.user[0];
+            if(type === 'organizator') {
+                await db.query(addRunQuery, [data_bieg, id_trasa, login, name]);
+                res.send('Bieg został wysłany do zatwierdzenia.');
+            }else{
+                res.send('Brak dostępu.');
+            }
+        }catch(err) {
             console.error(err);
-            res.end('Błąd! Bieg nie został dodany.');
-        }finally{
-            res.end('Bieg został wysłany do zatwierdzenia.');
+            res.send('Błąd! Bieg nie został dodany.');
         }
     },
 
     async editRun(req,res,next){
         try{
            const {name}=req.body;
-           await db.query(editRunQuery,[name]);
-        }catch(err){
+            const {type} = req.user[0];
+            if(type === 'organizator') {
+                await db.query(editRunQuery, [name]);
+                res.send('Bieg został zedytowany');
+            }else{
+                res.send('Brak dostępu.');
+            }
+        }catch(err) {
             console.error(err);
-            res.end('Błąd! Nie udało się edytować biegu');
-        }finally{
-            res.end('Bieg został zedytowany');
+            res.send('Błąd! Nie udało się edytować biegu');
         }
     }
 
