@@ -3,21 +3,13 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import {secret} from '../settings/environments';
 import {options} from '../settings/jwt';
-
+import {doesUserExistQuery, registerUserQuery} from '../settings/queries';
 const saltRounds = 10;
-
-const registerUserQuery = 'INSERT INTO Uzytkownik (LOGIN_UZYTKOWNIK, IMIE_UZYTKOWNIK, NAZWISKO_UZYTKOWNIK,' +
-                          'DATA_URODZENIA_UZYTKOWNIK, HASHED_PASS_UZYTKOWNIK, TYP_UZYTKOWNIK)' +
-                          'VALUES (?, ?, ?, ?, ?, ?)';
-
-const doesUserExistQuery = 'SELECT LOGIN_UZYTKOWNIK FROM Uzytkownik WHERE LOGIN_UZYTKOWNIK = ?';
-
-
 
 export default{
         async loginUser(req, res, next){
             try {
-                const token = await jwt.sign({log: req.login}, secret, options);
+                const token = await jwt.sign({log: req.user[0].login}, secret, options);
                 res.send({token});
             }catch(err) {
                 console.error(err);
