@@ -4,7 +4,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import auth from './routes/auth';
 import organizer from './routes/organizer';
-import administrator from "./routes/administrator";
+import admin from "./routes/admin";
 import message from './routes/message';
 import homepage from './routes/homepage';
 import passport from './settings/passport';
@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 passport();
 
-app.use('/administrator', administrator());
+app.use('/admin', admin());
 
 app.use('/api', auth());
 
@@ -31,7 +31,3 @@ app.use('/', homepage())
 const server = app.listen(port, ()=> console.log(`Serwer działa na porcie ${port}!`));
 
 const io = socket(server);
-
-/*io.on('connection', socket=>
-    console.log(`Utworzono połączenie websocket o id ${socket}`)
-)*/
