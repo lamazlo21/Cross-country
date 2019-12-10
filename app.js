@@ -4,6 +4,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import auth from './routes/auth';
 import organizer from './routes/organizer';
+import administrator from "./routes/administrator";
 import message from './routes/message';
 import homepage from './routes/homepage';
 import passport from './settings/passport';
@@ -16,6 +17,8 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 
 passport();
+
+app.use('/administrator', administrator());
 
 app.use('/api', auth());
 
