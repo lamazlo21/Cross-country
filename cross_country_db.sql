@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 10 Gru 2019, 11:17
+-- Czas generowania: 10 Gru 2019, 17:42
 -- Wersja serwera: 10.4.10-MariaDB
 -- Wersja PHP: 7.1.33
 
@@ -42,7 +42,7 @@ CREATE TABLE `bieg` (
 --
 
 INSERT INTO `bieg` (`ID_BIEG`, `DATA_BIEG`, `ID_TRASA`, `LOGIN_UZYTKOWNIK`, `NAZWA_BIEG`, `BIEG_AKCEPTACJA`) VALUES
-(1, '0010-10-10', 1, 'cxzvef', 'loooool', b'0');
+(1, '0010-10-10', 1, 'cxzvef', 'loooool', b'1');
 
 -- --------------------------------------------------------
 
@@ -57,6 +57,13 @@ CREATE TABLE `bieg_zakonczony` (
   `LOGIN_UZYTKOWNIK` varchar(50) NOT NULL,
   `NAZWA_BIEG` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `bieg_zakonczony`
+--
+
+INSERT INTO `bieg_zakonczony` (`ID_BIEG`, `DATA_BIEG`, `ID_TRASA`, `LOGIN_UZYTKOWNIK`, `NAZWA_BIEG`) VALUES
+(1, '2019-12-10', 1, 'lamazlo21', 'Skok przez tyczki');
 
 -- --------------------------------------------------------
 
@@ -224,6 +231,14 @@ CREATE TABLE `wyniki` (
   `MIEJSCE` int(5) NOT NULL,
   `CZAS` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `wyniki`
+--
+
+INSERT INTO `wyniki` (`ID_WYNIK`, `LOGIN_UZYTKOWNIK`, `ID_BIEG`, `MIEJSCE`, `CZAS`) VALUES
+(1, 'gerhold.oliver', 1, 1, '23:52:00'),
+(2, 'lamazlo213', 1, 2, '23:52:00');
 
 --
 -- Indeksy dla zrzutów tabel
