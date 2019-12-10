@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 06, 2019 at 09:21 PM
--- Server version: 10.3.16-MariaDB
--- PHP Version: 7.3.6
+-- Host: 127.0.0.1
+-- Czas generowania: 10 Gru 2019, 11:17
+-- Wersja serwera: 10.4.10-MariaDB
+-- Wersja PHP: 7.1.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,16 +19,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cross_country_db`
+-- Baza danych: `cross_country_db`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Bieg`
+-- Struktura tabeli dla tabeli `bieg`
 --
 
-CREATE TABLE `Bieg` (
+CREATE TABLE `bieg` (
   `ID_BIEG` int(10) UNSIGNED NOT NULL,
   `DATA_BIEG` date NOT NULL,
   `ID_TRASA` int(10) NOT NULL,
@@ -38,19 +38,19 @@ CREATE TABLE `Bieg` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Bieg`
+-- Zrzut danych tabeli `bieg`
 --
 
-INSERT INTO `Bieg` (`ID_BIEG`, `DATA_BIEG`, `ID_TRASA`, `LOGIN_UZYTKOWNIK`, `NAZWA_BIEG`, `BIEG_AKCEPTACJA`) VALUES
+INSERT INTO `bieg` (`ID_BIEG`, `DATA_BIEG`, `ID_TRASA`, `LOGIN_UZYTKOWNIK`, `NAZWA_BIEG`, `BIEG_AKCEPTACJA`) VALUES
 (1, '0010-10-10', 1, 'cxzvef', 'loooool', b'0');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Bieg_Zakonczony`
+-- Struktura tabeli dla tabeli `bieg_zakonczony`
 --
 
-CREATE TABLE `Bieg_Zakonczony` (
+CREATE TABLE `bieg_zakonczony` (
   `ID_BIEG` int(10) UNSIGNED NOT NULL,
   `DATA_BIEG` date NOT NULL,
   `ID_TRASA` int(10) NOT NULL,
@@ -61,10 +61,10 @@ CREATE TABLE `Bieg_Zakonczony` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Komentarze`
+-- Struktura tabeli dla tabeli `komentarze`
 --
 
-CREATE TABLE `Komentarze` (
+CREATE TABLE `komentarze` (
   `ID_KOMENTARZ` int(10) UNSIGNED NOT NULL,
   `DATA_KOMENTARZ` date NOT NULL DEFAULT current_timestamp(),
   `ID_BIEG` int(10) UNSIGNED NOT NULL,
@@ -75,10 +75,10 @@ CREATE TABLE `Komentarze` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Przeszkoda`
+-- Struktura tabeli dla tabeli `przeszkoda`
 --
 
-CREATE TABLE `Przeszkoda` (
+CREATE TABLE `przeszkoda` (
   `ID_PRZESZKODA` int(10) UNSIGNED NOT NULL,
   `NAZWA_PRZESZKODA` varchar(60) NOT NULL,
   `TRUDNOSC_PRZESZKODA` varchar(20) NOT NULL,
@@ -88,10 +88,10 @@ CREATE TABLE `Przeszkoda` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Przeszkoda_Bieg`
+-- Struktura tabeli dla tabeli `przeszkoda_bieg`
 --
 
-CREATE TABLE `Przeszkoda_Bieg` (
+CREATE TABLE `przeszkoda_bieg` (
   `ID_PRZESZKODA` int(10) UNSIGNED NOT NULL,
   `ID_BIEG` int(10) UNSIGNED NOT NULL,
   `ILOSC_PRZESZKODA` int(10) NOT NULL
@@ -100,10 +100,10 @@ CREATE TABLE `Przeszkoda_Bieg` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Trasa`
+-- Struktura tabeli dla tabeli `trasa`
 --
 
-CREATE TABLE `Trasa` (
+CREATE TABLE `trasa` (
   `ID_TRASA` int(10) NOT NULL,
   `POCZATEK_TRASA` varchar(50) NOT NULL,
   `KONIEC_TRASA` varchar(50) NOT NULL,
@@ -112,19 +112,19 @@ CREATE TABLE `Trasa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Trasa`
+-- Zrzut danych tabeli `trasa`
 --
 
-INSERT INTO `Trasa` (`ID_TRASA`, `POCZATEK_TRASA`, `KONIEC_TRASA`, `MIASTO_TRASA`, `DLUGOSC_TRASA`) VALUES
-(1, 'wro', 'wro', 'xd', 100);
+INSERT INTO `trasa` (`ID_TRASA`, `POCZATEK_TRASA`, `KONIEC_TRASA`, `MIASTO_TRASA`, `DLUGOSC_TRASA`) VALUES
+(1, 'brochow', 'pwr', 'wroclaw', 50);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Uczestnicy_Bieg`
+-- Struktura tabeli dla tabeli `uczestnicy_bieg`
 --
 
-CREATE TABLE `Uczestnicy_Bieg` (
+CREATE TABLE `uczestnicy_bieg` (
   `ID_BIEG` int(10) UNSIGNED NOT NULL,
   `LOGIN_UZYTKOWNIK` varchar(50) NOT NULL,
   `OBECNOSC_BIEGACZ` tinyint(1) NOT NULL
@@ -133,10 +133,10 @@ CREATE TABLE `Uczestnicy_Bieg` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Uczestnicy_Bieg_Zakonczony`
+-- Struktura tabeli dla tabeli `uczestnicy_bieg_zakonczony`
 --
 
-CREATE TABLE `Uczestnicy_Bieg_Zakonczony` (
+CREATE TABLE `uczestnicy_bieg_zakonczony` (
   `ID_BIEG` int(10) UNSIGNED NOT NULL,
   `LOGIN_UZYTKOWNIK` varchar(50) NOT NULL,
   `CZAS` time(6) NOT NULL
@@ -145,10 +145,10 @@ CREATE TABLE `Uczestnicy_Bieg_Zakonczony` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Uzytkownik`
+-- Struktura tabeli dla tabeli `uzytkownik`
 --
 
-CREATE TABLE `Uzytkownik` (
+CREATE TABLE `uzytkownik` (
   `LOGIN_UZYTKOWNIK` varchar(50) NOT NULL,
   `IMIE_UZYTKOWNIK` varchar(100) NOT NULL,
   `NAZWISKO_UZYTKOWNIK` varchar(100) NOT NULL,
@@ -159,10 +159,10 @@ CREATE TABLE `Uzytkownik` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Uzytkownik`
+-- Zrzut danych tabeli `uzytkownik`
 --
 
-INSERT INTO `Uzytkownik` (`LOGIN_UZYTKOWNIK`, `IMIE_UZYTKOWNIK`, `NAZWISKO_UZYTKOWNIK`, `DATA_URODZENIA_UZYTKOWNIK`, `HASHED_PASS_UZYTKOWNIK`, `TYP_UZYTKOWNIK`, `WOLONTARIAT_ILOSC`) VALUES
+INSERT INTO `uzytkownik` (`LOGIN_UZYTKOWNIK`, `IMIE_UZYTKOWNIK`, `NAZWISKO_UZYTKOWNIK`, `DATA_URODZENIA_UZYTKOWNIK`, `HASHED_PASS_UZYTKOWNIK`, `TYP_UZYTKOWNIK`, `WOLONTARIAT_ILOSC`) VALUES
 ('borer.fredy', 'Garnett', 'Wiegand', '2019-01-05', 'b8467bcad958f0189de8a6e4a0b2545226e5be0d', 'Miss', 2),
 ('cxzvef', 'asdsad', 'zxcxzc', '2010-10-10', '$2b$10$hmy1AA8fOQadxqjY1jTIqOqdhjSpixpSMTP0NtvujN.lKabE.E/py', 'Biegacz', 0),
 ('ernest.hickle', 'Augustus', 'Hodkiewicz', '2000-04-29', '6748e866a40ae6abdf07dd04da57c0c065137a9b', 'Prof.', 9),
@@ -176,10 +176,10 @@ INSERT INTO `Uzytkownik` (`LOGIN_UZYTKOWNIK`, `IMIE_UZYTKOWNIK`, `NAZWISKO_UZYTK
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Wiadomosc`
+-- Struktura tabeli dla tabeli `wiadomosc`
 --
 
-CREATE TABLE `Wiadomosc` (
+CREATE TABLE `wiadomosc` (
   `ID_WIADOMOSC` int(10) UNSIGNED NOT NULL,
   `LOGIN_NADAWCA` varchar(50) NOT NULL,
   `LOGIN_ODBIORCA` varchar(50) NOT NULL,
@@ -189,10 +189,10 @@ CREATE TABLE `Wiadomosc` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Wiadomosc`
+-- Zrzut danych tabeli `wiadomosc`
 --
 
-INSERT INTO `Wiadomosc` (`ID_WIADOMOSC`, `LOGIN_NADAWCA`, `LOGIN_ODBIORCA`, `DATA_WIADOMOSC`, `TRESC_WIADOMOSC`, `STATUS_WIADOMOSC`) VALUES
+INSERT INTO `wiadomosc` (`ID_WIADOMOSC`, `LOGIN_NADAWCA`, `LOGIN_ODBIORCA`, `DATA_WIADOMOSC`, `TRESC_WIADOMOSC`, `STATUS_WIADOMOSC`) VALUES
 (1, 'borer.fredy', 'lamazlo213', '2019-12-06', 'asdsadf', 0),
 (2, 'borer.fredy', 'lamazlo213', '2019-12-06', 'asdsadf', 0),
 (3, 'borer.fredy', 'lamazlo213', '2019-12-06', 'looool', 0),
@@ -202,166 +202,195 @@ INSERT INTO `Wiadomosc` (`ID_WIADOMOSC`, `LOGIN_NADAWCA`, `LOGIN_ODBIORCA`, `DAT
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Wolontariusze_Bieg`
+-- Struktura tabeli dla tabeli `wolontariusze_bieg`
 --
 
-CREATE TABLE `Wolontariusze_Bieg` (
+CREATE TABLE `wolontariusze_bieg` (
   `ID_BIEG` int(10) UNSIGNED NOT NULL,
   `LOGIN_UZYTKOWNIK` varchar(50) NOT NULL,
   `OBECNOSC_WOLONTARIUSZ` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Indexes for dumped tables
+-- Struktura tabeli dla tabeli `wyniki`
+--
+
+CREATE TABLE `wyniki` (
+  `ID_WYNIK` int(10) NOT NULL,
+  `LOGIN_UZYTKOWNIK` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `ID_BIEG` int(10) UNSIGNED NOT NULL,
+  `MIEJSCE` int(5) NOT NULL,
+  `CZAS` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indeksy dla zrzutów tabel
 --
 
 --
--- Indexes for table `Bieg`
+-- Indeksy dla tabeli `bieg`
 --
-ALTER TABLE `Bieg`
+ALTER TABLE `bieg`
   ADD PRIMARY KEY (`ID_BIEG`),
   ADD KEY `ID_TRASA` (`ID_TRASA`),
   ADD KEY `LOGIN_UZYTKOWNIK` (`LOGIN_UZYTKOWNIK`);
 
 --
--- Indexes for table `Bieg_Zakonczony`
+-- Indeksy dla tabeli `bieg_zakonczony`
 --
-ALTER TABLE `Bieg_Zakonczony`
+ALTER TABLE `bieg_zakonczony`
   ADD PRIMARY KEY (`ID_BIEG`),
   ADD KEY `LOGIN_UZYTKOWNIK` (`LOGIN_UZYTKOWNIK`),
   ADD KEY `ID_TRASA` (`ID_TRASA`);
 
 --
--- Indexes for table `Komentarze`
+-- Indeksy dla tabeli `komentarze`
 --
-ALTER TABLE `Komentarze`
+ALTER TABLE `komentarze`
   ADD PRIMARY KEY (`ID_KOMENTARZ`),
   ADD KEY `LOGIN_UZYTKOWNIK` (`LOGIN_UZYTKOWNIK`),
   ADD KEY `ID_BIEG` (`ID_BIEG`);
 
 --
--- Indexes for table `Przeszkoda`
+-- Indeksy dla tabeli `przeszkoda`
 --
-ALTER TABLE `Przeszkoda`
+ALTER TABLE `przeszkoda`
   ADD PRIMARY KEY (`ID_PRZESZKODA`);
 
 --
--- Indexes for table `Przeszkoda_Bieg`
+-- Indeksy dla tabeli `przeszkoda_bieg`
 --
-ALTER TABLE `Przeszkoda_Bieg`
+ALTER TABLE `przeszkoda_bieg`
   ADD KEY `ID_PRZESZKODA` (`ID_PRZESZKODA`),
   ADD KEY `ID_BIEG` (`ID_BIEG`);
 
 --
--- Indexes for table `Trasa`
+-- Indeksy dla tabeli `trasa`
 --
-ALTER TABLE `Trasa`
+ALTER TABLE `trasa`
   ADD PRIMARY KEY (`ID_TRASA`);
 
 --
--- Indexes for table `Uczestnicy_Bieg`
+-- Indeksy dla tabeli `uczestnicy_bieg`
 --
-ALTER TABLE `Uczestnicy_Bieg`
+ALTER TABLE `uczestnicy_bieg`
   ADD KEY `ID_BIEG` (`ID_BIEG`),
   ADD KEY `LOGIN_UZYTKOWNIK` (`LOGIN_UZYTKOWNIK`);
 
 --
--- Indexes for table `Uczestnicy_Bieg_Zakonczony`
+-- Indeksy dla tabeli `uczestnicy_bieg_zakonczony`
 --
-ALTER TABLE `Uczestnicy_Bieg_Zakonczony`
+ALTER TABLE `uczestnicy_bieg_zakonczony`
   ADD KEY `ID_BIEG` (`ID_BIEG`),
   ADD KEY `LOGIN_UZYTKOWNIK` (`LOGIN_UZYTKOWNIK`);
 
 --
--- Indexes for table `Uzytkownik`
+-- Indeksy dla tabeli `uzytkownik`
 --
-ALTER TABLE `Uzytkownik`
+ALTER TABLE `uzytkownik`
   ADD PRIMARY KEY (`LOGIN_UZYTKOWNIK`);
 
 --
--- Indexes for table `Wiadomosc`
+-- Indeksy dla tabeli `wiadomosc`
 --
-ALTER TABLE `Wiadomosc`
+ALTER TABLE `wiadomosc`
   ADD PRIMARY KEY (`ID_WIADOMOSC`),
   ADD KEY `LOGIN_NADAWCA` (`LOGIN_NADAWCA`),
   ADD KEY `LOGIN_ODBIORCA` (`LOGIN_ODBIORCA`);
 
 --
--- Indexes for table `Wolontariusze_Bieg`
+-- Indeksy dla tabeli `wolontariusze_bieg`
 --
-ALTER TABLE `Wolontariusze_Bieg`
+ALTER TABLE `wolontariusze_bieg`
   ADD KEY `LOGIN_BIEGACZ` (`LOGIN_UZYTKOWNIK`),
   ADD KEY `ID_BIEG` (`ID_BIEG`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indeksy dla tabeli `wyniki`
+--
+ALTER TABLE `wyniki`
+  ADD PRIMARY KEY (`ID_WYNIK`),
+  ADD KEY `LOGIN_UZYTKOWNIK` (`LOGIN_UZYTKOWNIK`),
+  ADD KEY `ID_BIEG` (`ID_BIEG`);
+
+--
+-- AUTO_INCREMENT dla tabel zrzutów
 --
 
 --
--- AUTO_INCREMENT for table `Wiadomosc`
+-- AUTO_INCREMENT dla tabeli `wiadomosc`
 --
-ALTER TABLE `Wiadomosc`
+ALTER TABLE `wiadomosc`
   MODIFY `ID_WIADOMOSC` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- Constraints for dumped tables
+-- Ograniczenia dla zrzutów tabel
 --
 
 --
--- Constraints for table `Bieg`
+-- Ograniczenia dla tabeli `bieg`
 --
-ALTER TABLE `Bieg`
-  ADD CONSTRAINT `Bieg_ibfk_1` FOREIGN KEY (`ID_TRASA`) REFERENCES `Trasa` (`ID_TRASA`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Bieg_ibfk_2` FOREIGN KEY (`LOGIN_UZYTKOWNIK`) REFERENCES `Uzytkownik` (`LOGIN_UZYTKOWNIK`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `bieg`
+  ADD CONSTRAINT `Bieg_ibfk_1` FOREIGN KEY (`ID_TRASA`) REFERENCES `trasa` (`ID_TRASA`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Bieg_ibfk_2` FOREIGN KEY (`LOGIN_UZYTKOWNIK`) REFERENCES `uzytkownik` (`LOGIN_UZYTKOWNIK`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `Bieg_Zakonczony`
+-- Ograniczenia dla tabeli `bieg_zakonczony`
 --
-ALTER TABLE `Bieg_Zakonczony`
-  ADD CONSTRAINT `Bieg_Zakonczony_ibfk_1` FOREIGN KEY (`ID_TRASA`) REFERENCES `Trasa` (`ID_TRASA`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Bieg_Zakonczony_ibfk_2` FOREIGN KEY (`LOGIN_UZYTKOWNIK`) REFERENCES `Uzytkownik` (`LOGIN_UZYTKOWNIK`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `bieg_zakonczony`
+  ADD CONSTRAINT `Bieg_Zakonczony_ibfk_1` FOREIGN KEY (`ID_TRASA`) REFERENCES `trasa` (`ID_TRASA`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Bieg_Zakonczony_ibfk_2` FOREIGN KEY (`LOGIN_UZYTKOWNIK`) REFERENCES `uzytkownik` (`LOGIN_UZYTKOWNIK`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `Komentarze`
+-- Ograniczenia dla tabeli `komentarze`
 --
-ALTER TABLE `Komentarze`
-  ADD CONSTRAINT `Komentarze_ibfk_1` FOREIGN KEY (`ID_BIEG`) REFERENCES `Bieg_Zakonczony` (`ID_BIEG`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Komentarze_ibfk_2` FOREIGN KEY (`LOGIN_UZYTKOWNIK`) REFERENCES `Uzytkownik` (`LOGIN_UZYTKOWNIK`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `komentarze`
+  ADD CONSTRAINT `Komentarze_ibfk_1` FOREIGN KEY (`ID_BIEG`) REFERENCES `bieg_zakonczony` (`ID_BIEG`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Komentarze_ibfk_2` FOREIGN KEY (`LOGIN_UZYTKOWNIK`) REFERENCES `uzytkownik` (`LOGIN_UZYTKOWNIK`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `Przeszkoda_Bieg`
+-- Ograniczenia dla tabeli `przeszkoda_bieg`
 --
-ALTER TABLE `Przeszkoda_Bieg`
-  ADD CONSTRAINT `Przeszkoda_Bieg_ibfk_1` FOREIGN KEY (`ID_PRZESZKODA`) REFERENCES `Przeszkoda` (`ID_PRZESZKODA`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Przeszkoda_Bieg_ibfk_2` FOREIGN KEY (`ID_BIEG`) REFERENCES `Bieg` (`ID_BIEG`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `przeszkoda_bieg`
+  ADD CONSTRAINT `Przeszkoda_Bieg_ibfk_1` FOREIGN KEY (`ID_PRZESZKODA`) REFERENCES `przeszkoda` (`ID_PRZESZKODA`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Przeszkoda_Bieg_ibfk_2` FOREIGN KEY (`ID_BIEG`) REFERENCES `bieg` (`ID_BIEG`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `Uczestnicy_Bieg`
+-- Ograniczenia dla tabeli `uczestnicy_bieg`
 --
-ALTER TABLE `Uczestnicy_Bieg`
-  ADD CONSTRAINT `Uczestnicy_Bieg_ibfk_1` FOREIGN KEY (`LOGIN_UZYTKOWNIK`) REFERENCES `Uzytkownik` (`LOGIN_UZYTKOWNIK`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Uczestnicy_Bieg_ibfk_2` FOREIGN KEY (`ID_BIEG`) REFERENCES `Bieg` (`ID_BIEG`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `uczestnicy_bieg`
+  ADD CONSTRAINT `Uczestnicy_Bieg_ibfk_1` FOREIGN KEY (`LOGIN_UZYTKOWNIK`) REFERENCES `uzytkownik` (`LOGIN_UZYTKOWNIK`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Uczestnicy_Bieg_ibfk_2` FOREIGN KEY (`ID_BIEG`) REFERENCES `bieg` (`ID_BIEG`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `Uczestnicy_Bieg_Zakonczony`
+-- Ograniczenia dla tabeli `uczestnicy_bieg_zakonczony`
 --
-ALTER TABLE `Uczestnicy_Bieg_Zakonczony`
-  ADD CONSTRAINT `Uczestnicy_Bieg_Zakonczony_ibfk_1` FOREIGN KEY (`LOGIN_UZYTKOWNIK`) REFERENCES `Uzytkownik` (`LOGIN_UZYTKOWNIK`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Uczestnicy_Bieg_Zakonczony_ibfk_2` FOREIGN KEY (`ID_BIEG`) REFERENCES `Bieg_Zakonczony` (`ID_BIEG`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `uczestnicy_bieg_zakonczony`
+  ADD CONSTRAINT `Uczestnicy_Bieg_Zakonczony_ibfk_1` FOREIGN KEY (`LOGIN_UZYTKOWNIK`) REFERENCES `uzytkownik` (`LOGIN_UZYTKOWNIK`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Uczestnicy_Bieg_Zakonczony_ibfk_2` FOREIGN KEY (`ID_BIEG`) REFERENCES `bieg_zakonczony` (`ID_BIEG`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `Wiadomosc`
+-- Ograniczenia dla tabeli `wiadomosc`
 --
-ALTER TABLE `Wiadomosc`
-  ADD CONSTRAINT `Wiadomosc_ibfk_1` FOREIGN KEY (`LOGIN_ODBIORCA`) REFERENCES `Uzytkownik` (`LOGIN_UZYTKOWNIK`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Wiadomosc_ibfk_2` FOREIGN KEY (`LOGIN_NADAWCA`) REFERENCES `Uzytkownik` (`LOGIN_UZYTKOWNIK`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `wiadomosc`
+  ADD CONSTRAINT `Wiadomosc_ibfk_1` FOREIGN KEY (`LOGIN_ODBIORCA`) REFERENCES `uzytkownik` (`LOGIN_UZYTKOWNIK`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Wiadomosc_ibfk_2` FOREIGN KEY (`LOGIN_NADAWCA`) REFERENCES `uzytkownik` (`LOGIN_UZYTKOWNIK`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `Wolontariusze_Bieg`
+-- Ograniczenia dla tabeli `wolontariusze_bieg`
 --
-ALTER TABLE `Wolontariusze_Bieg`
-  ADD CONSTRAINT `Wolontariusze_Bieg_ibfk_1` FOREIGN KEY (`ID_BIEG`) REFERENCES `Bieg` (`ID_BIEG`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Wolontariusze_Bieg_ibfk_2` FOREIGN KEY (`LOGIN_UZYTKOWNIK`) REFERENCES `Uzytkownik` (`LOGIN_UZYTKOWNIK`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `wolontariusze_bieg`
+  ADD CONSTRAINT `Wolontariusze_Bieg_ibfk_1` FOREIGN KEY (`ID_BIEG`) REFERENCES `bieg` (`ID_BIEG`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Wolontariusze_Bieg_ibfk_2` FOREIGN KEY (`LOGIN_UZYTKOWNIK`) REFERENCES `uzytkownik` (`LOGIN_UZYTKOWNIK`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ograniczenia dla tabeli `wyniki`
+--
+ALTER TABLE `wyniki`
+  ADD CONSTRAINT `wyniki_ibfk_1` FOREIGN KEY (`ID_BIEG`) REFERENCES `bieg_zakonczony` (`ID_BIEG`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `wyniki_ibfk_2` FOREIGN KEY (`LOGIN_UZYTKOWNIK`) REFERENCES `uzytkownik` (`LOGIN_UZYTKOWNIK`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
