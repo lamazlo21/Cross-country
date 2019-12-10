@@ -31,7 +31,7 @@ module.exports = {
 
     signupRunnerQuery: 'INSERT Uczestnicy_Bieg (ID_BIEG, LOGIN_UZYTKOWNIK) VALUES(?, ?)',
 
-    editRouteQuery: 'UPDATE Trasa SET POCZATEK_TRASA = ?, KONIEC_TRASA = ?, MIASTO_TRASA = ?, DLUGOSC_TRASA = ? WHERE ID_TRASA = 1',
+    editRouteQuery: 'UPDATE Trasa SET POCZATEK_TRASA = ?, KONIEC_TRASA = ?, MIASTO_TRASA = ?, DLUGOSC_TRASA = ? WHERE ID_TRASA = ?',
 
     addResultsQuery: 'INSERT INTO wyniki (ID_WYNIK, LOGIN_UZYTKOWNIK, ID_BIEG, MIEJSCE, CZAS) VALUES(?,?,?,?,?)',
 
