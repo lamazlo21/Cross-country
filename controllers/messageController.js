@@ -19,7 +19,7 @@ export default{
         try{
             const {login} = req.user[0];
             const {sender} = req.params;
-            const messages = await db.query(getMessagesQuery, [login, sender]);
+            const messages = await db.query(getMessagesQuery, [login, sender, sender, login]);
             res.send(messages);
         }catch(err){
             console.error(err);
