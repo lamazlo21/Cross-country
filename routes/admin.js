@@ -7,13 +7,17 @@ export default ()=>{
 
     api.put('/:id', jwtAuth, admin.editRoute);
 
-    api.post('/result', jwtAuth, admin.addResults);
+    api.post('/result/:id', jwtAuth, admin.addResults);
 
     api.post('/user', jwtAuth, admin.addUser);
 
-    api.post('/unaccepted', jwtAuth, admin.confirmRun);
+    api.put('/runs/:id', jwtAuth, admin.confirmRun);
 
-    api.delete('/users', jwtAuth, admin.removeUser);
+    api.delete('/users/:login', jwtAuth, admin.removeUser);
+
+    api.get('/users', jwtAuth, admin.getUsers);
+
+    api.get('/runs', jwtAuth, admin.getUnacceptedRuns);
 
     return api;
 }

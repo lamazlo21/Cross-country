@@ -18,7 +18,7 @@ export default{
         },
 
         async registerUser(req, res, next){
-        const user_type = 'Biegacz';
+        const user_type = 'biegacz';
         try {
             const {login, first_name, last_name, birth_date, pass} = req.body;
             const user = await db.query(doesUserExistQuery, [login]);

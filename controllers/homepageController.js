@@ -7,8 +7,8 @@ export default {
             const {login, type} = req.user[0];
             if(type === 'biegacz' || type === 'organizator') {
                 const isSigned = await db.query(isSignedQuery, [req.params.id, login, req.params.id, login]);
-                if (isSigned[0].volunter == 0 && isSigned[0].runner == 0) {
-                    await db.query(signupRunnerQuery, [req.params.id, runner]);
+                if (isSigned[0].volunter == 0 && isSigned[0].login == 0) {
+                    await db.query(signupRunnerQuery, [req.params.id, login]);
                     res.send('Zostałeś zapisany jako biegacz.');
                 } else if (isSigned[0].volunter == 0 && isSigned[0].runner != 0) {
                     res.send('Jesteś już zapisany jako biegacz.')
@@ -30,7 +30,7 @@ export default {
             if(type === 'biegacz' || type === 'organizator') {
                 const isSigned = await db.query(isSignedQuery, [req.params.id, login, req.params.id, login]);
                 if (isSigned[0].volunter == 0 && isSigned[0].runner == 0) {
-                    await db.query(signupVolunteryQuery, [req.params.id, volunter]);
+                    await db.query(signupVolunteryQuery, [req.params.id, login]);
                     res.send('Zostałeś zapisany jako biegacz.');
                 } else if (isSigned[0].volunter == 0 && isSigned[0].runner != 0) {
                     res.send('Jesteś już zapisany jako biegacz.')
@@ -42,7 +42,7 @@ export default {
             }
         } catch (err) {
             console.error(err);
-            res.send('Nie udało się zapisać jako biegacz.');
+            res.send('Nie udało się zapisać jako wolontariusz.');
         }
     },
 
