@@ -1,5 +1,5 @@
 import db from '../settings/db';
-import {editRouteQuery, addResultsQuery, registerUserQuery, confirmRun, removeUser} from '../settings/queries';
+import {editRouteQuery, addResultsQuery, registerUserQuery, confirmRun, removeUser, selectUnacceptedRuns, getAllUsers} from '../settings/queries';
 import bcrypt from 'bcrypt';
 
 const saltRounds = 10;
@@ -90,6 +90,43 @@ export default{
             console.error(err);
             res.send('Błąd! Nie udało się usunąć użytkownika');
         }
+    },
+    
+       async getUnacceptedRuns(req, res, next){
+        try{
+            const {type} = req.user[0];
+            if(type === 'admin') {
+                await db.query(selectUnacceptedRuns);
+                res.send('Pomyślnie pobrano liste');
+            }
+            else{
+                res.send('Brak dostępu.');
+            }
+        }
+        catch(err) {
+            console.error(err);
+            res.send('Błąd! Nie udało się pobrać listy');
+        }
+    },
+
+    async getUsers(req, res, next){
+        try{
+            const {type} = req.user[0];
+            if(type === 'admin') {
+                await db.query(getAllUsers);
+                res.send('Pomyślnie pobrano liste');
+            }
+            else{
+                res.send('Brak dostępu.');
+            }
+
+        }
+        catch(err) {
+            console.error(err);
+            res.send('Błąd! Nie udało się pobrać listy');
+        }
     }
+    
+    
 
 }
