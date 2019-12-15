@@ -11,5 +11,11 @@ export default ()=>{
 
     api.post('/:id/volunter', jwtAuth, homepageController.singupVoluntary);
 
+    api.get('/:id/profile',jwtAuth, homepageController.showProfile)
+
+    api.get('/:id/statistic',jwtAuth,homepageController.showStatistic);
+
+    api.put('/:id/edit',jwtAuth,homepageController.editProfile);
+
   return api;
 };

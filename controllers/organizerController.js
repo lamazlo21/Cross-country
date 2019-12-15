@@ -1,5 +1,5 @@
 import db from '../settings/db';
-import {addRunQuery, editRunQuery} from '../settings/queries';
+import {addRunQuery, editRunQuery, getRunsQuery, showRunners,getOrganizator} from '../settings/queries';
 
 export default{
     async addRun(req, res, next){
@@ -32,6 +32,30 @@ export default{
             console.error(err);
             res.send('Błąd! Nie udało się edytować biegu');
         }
+    },
+
+    async showRunners(req,res,next){
+       try{
+           const {login_organizator}= await db.query(getOrganizator,[req.params.id]);
+           const {type} =req.user[0];
+
+           if(type=='organizator'){
+               if(login_organizator==req.user.login) {
+                   const runners = await db.query(showRunners, [req.params.id]);
+                   res.send(runners);
+
+               }else{
+                   console.error(err);
+                   res.send('Błąd! Dany bieg nie jest utworzony przez danego organizatora');
+               }
+           }
+        }catch(err){
+           console.error(err);
+           res.send('Błąd! Nie udało się wyświetlić biegaczy');
+       }
+
+
+
     }
 
 }

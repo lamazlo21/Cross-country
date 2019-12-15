@@ -9,5 +9,8 @@ export default ()=>{
 
     api.put('/edit', jwtAuth, organizer.editRun);
 
+    api.get('/:id/showRunners', jwtAuth,organizer.showRunners);
+
+
     return api;
 }
