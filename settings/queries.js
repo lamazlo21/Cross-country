@@ -38,5 +38,9 @@ module.exports = {
     confirmRun: 'UPDATE bieg SET BIEG_AKCEPTACJA = 1 WHERE ID_BIEG = ?',
 
     removeUser: 'DELETE FROM uzytkownik WHERE LOGIN_UZYTKOWNIK = ?',
+    
+    selectUnacceptedRuns: 'SELECT * FROM bieg WHERE BIEG_AKCEPTACJA = 0',
+
+    getAllUsers: 'SELECT LOGIN_UZYTKOWNIK, IMIE_UZYTKOWNIK, NAZWISKO_UZYTKOWNIK, TYP_UZYTKOWNIK FROM uzytkownik',
 
 };
