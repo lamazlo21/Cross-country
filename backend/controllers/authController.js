@@ -1,5 +1,6 @@
 import db from '../settings/db';
 import bcrypt from 'bcrypt';
+import cookie from 'cookie';
 import jwt from 'jsonwebtoken';
 import {secret} from '../settings/environments';
 import {options} from '../settings/jwt';
@@ -10,10 +11,13 @@ export default{
         async loginUser(req, res, next){
             try {
                 const token = await jwt.sign({log: req.user[0].login}, secret, options);
-                res.send({token});
+                res.end();
             }catch(err) {
                 console.error(err);
-                res.send('Wystąpił problem podczas logowania.')
+                res.json({
+                    message: 'Wystąpił problem podczas logowania.',
+                    success: false
+                })
             }
         },
 
@@ -25,13 +29,22 @@ export default{
             if(user.length == 0) {
                 const hashed_pass = await bcrypt.hash(pass, saltRounds);
                 await db.query(registerUserQuery, [login, first_name, last_name, birth_date, hashed_pass, user_type]);
-                res.send('Użytkownik został pomyślnie zarejestrowany');
+                res.json({
+                    message: 'Użytkownik został pomyślnie zarejestrowany',
+                    success: true
+                });
             }else {
-                res.send('Użytkownik o podanym loginie już istnieje.');
+                res.json({
+                    message: 'Użytkownik o podanym loginie już istnieje.',
+                    success: false
+                });
             }
         }catch(err) {
             console.error(err);
-            res.send('Błąd! Użytkownik nie został zarejestrowany');
+            res.json({
+                message: 'Błąd! Użytkownik nie został zarejestrowany.',
+                success: false
+            });
         }
     }
 }
