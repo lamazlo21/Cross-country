@@ -13,7 +13,13 @@ import socket from 'socket.io';
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://127.0.0.1:3000',
+    credentials: true,
+    methods: ['GET', 'POST', 'DELETE', 'PUT'],
+    allowedHeader: ['Content-Type', 'Set-Cookie', '*']
+
+}));
 
 app.use(bodyParser.json({type: 'application/json'}));
 

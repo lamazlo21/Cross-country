@@ -7,9 +7,9 @@ import Form from '../components/SignInForm';
 import {submitForm} from "../components/Fetch";
 
 // Variables
-const url = 'http://127.0.0.1:3102/api/login';
+const url = 'http://127.0.0.1:3100/api/login';
 
-const validateForm = (e, changeState) => {
+const validateForm = async (e, changeState) => {
     let errors = [];
     const form = document.forms['signInForm'];
     if(form['login'].value.length < 8)
@@ -28,9 +28,12 @@ const validateForm = (e, changeState) => {
         const data = {}
         data.login = form['login'].value;
         data.pass = form['password'].value;
-        submitForm(url, data, changeState);
+        let redirect = await submitForm(url, data, changeState);
         form['login'].value = '';
         form['password'].value = '';
+        if(redirect) {
+            window.location.href = 'http://127.0.0.1:3000/';
+        }
     }
 };
 

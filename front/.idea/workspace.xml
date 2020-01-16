@@ -15,6 +15,16 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
   <component name="ProjectId" id="1WGQtQbVV9OaEAjTP5zuul7AqkN" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -83,6 +93,8 @@
       <workItem from="1578904615467" duration="27850000" />
       <workItem from="1578992407911" duration="16785000" />
       <workItem from="1579035564198" duration="9105000" />
+      <workItem from="1579093331860" duration="17973000" />
+      <workItem from="1579137366472" duration="1248000" />
     </task>
     <servers />
   </component>
@@ -90,6 +102,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="141" y="54" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579104812845">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="141" y="54" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1366.741/1366.0.1920.1080@0.27.1366.741" timestamp="1579104812845" />
     <state x="503" y="221" width="558" height="390" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1578936101896">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -137,6 +153,10 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/pages/Homepage.js</url>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/pages/Signin.js</url>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

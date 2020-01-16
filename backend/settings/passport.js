@@ -3,11 +3,12 @@ import passportJWT from 'passport-jwt';
 import db from '../settings/db';
 import {Strategy} from 'passport-local';
 import {loginUserQuery, authUserQuery} from '../settings/queries';
+import {options} from '../settings/jwt';
 import {secret} from '../settings/environments';
 import bcrypt from 'bcrypt';
 
-const JWTStrategy = passportJWT.Strategy;
-const ExtractJWT = passportJWT.ExtractJwt;
+import JwtCookieComboStrategy from 'passport-jwt-cookiecombo';
+
 
 export default()=>{
     passport.use(new Strategy({
@@ -24,7 +25,7 @@ export default()=>{
                     else
                         return done(null, false, {message: 'Wprowadzone dane są niepoprawne.'});
                 }else
-                    return done(null, false, {message: 'Wprowadzone dane są niepoprawne.'});
+                    return done(null, false, {message: 'Podany login nie istnieje.'});
             }catch(err){
                 console.error(err);
                 return done(err, false, {message: 'Wystąpił błąd podczas logowania.'});
@@ -32,9 +33,9 @@ export default()=>{
         }
     ));
 
-    passport.use(new JWTStrategy({
-        jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-        secretOrKey: secret
+    passport.use(new JwtCookieComboStrategy({
+        jwtVerifyOptions: options,
+        secretOrPublicKey: secret
     },
         async (payload, done)=>{
             try{
