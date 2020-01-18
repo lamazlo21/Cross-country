@@ -10,10 +10,11 @@ const saltRounds = 10;
 export default{
         async loginUser(req, res, next){
             try{
-                const token = await jwt.sign({log: req.user[0].login}, secret, options);
-                res.setHeader('Set-Cookie', cookie.serialize('cross-country-token', token, {
+                const token = await jwt.sign({log: req.user[0].login, typ: req.user[0].type}, secret, options);
+                res.setHeader('Set-Cookie', cookie.serialize('crosscountrytoken', token, {
                     httpOnly: true,
                     signed: true,
+                    sameSite: true,
                     maxAge: 60 * 60 * 24 * 7,
                     path: '/'
                 },
@@ -25,7 +26,9 @@ export default{
 
                 res.json({
                    message: 'Zalogowano do serwisu!',
-                   success: true
+                   success: true,
+                    type: req.user[0].login,
+                    loged: '1'
                 });
             }catch(err) {
                 console.error(err);

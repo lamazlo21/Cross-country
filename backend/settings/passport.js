@@ -9,7 +9,6 @@ import bcrypt from 'bcrypt';
 
 import JwtCookieComboStrategy from 'passport-jwt-cookiecombo';
 
-
 export default()=>{
     passport.use(new Strategy({
         usernameField: 'login',
@@ -32,19 +31,4 @@ export default()=>{
             }
         }
     ));
-
-    passport.use(new JwtCookieComboStrategy({
-        jwtVerifyOptions: options,
-        secretOrPublicKey: secret
-    },
-        async (payload, done)=>{
-            try{
-                const user = await db.query(authUserQuery, [payload.log]);
-                return done(null, user)
-            }catch(err){
-                console.error(err);
-                return done(err);
-            }
-        }
-        ))
 }

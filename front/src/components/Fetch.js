@@ -1,5 +1,6 @@
 const fetchData = async (updateData, url) => {
     const res = await fetch(url, {
+        method: "GET",
         mode: "cors",
         credentials: "include"
     });
@@ -28,7 +29,7 @@ const submitForm = async (url, body, updateData) => {
         });
     }
     updateData(data);
-    return data[0].success;
+    return data[0];
 }
 
 export{

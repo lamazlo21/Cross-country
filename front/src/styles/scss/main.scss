@@ -17,6 +17,12 @@
   // Errors
  @import "errors";
 
+ // Users
+  @import "user";
+
+  // Result
+  @import "result";
+
 // Pages
 
   // Homepage
@@ -24,6 +30,12 @@
 
   // SignIn & SignUp
  @import "sign";
+
+  // Profile
+  @import "profile";
+
+  // Stats
+  @import "stats";
 
 *{
   margin: 0;
