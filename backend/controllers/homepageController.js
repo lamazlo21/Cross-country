@@ -4,10 +4,10 @@ import {getRunsQuery, isSignedQuery, signupRunnerQuery, signupVolunteryQuery} fr
 export default {
     async signupRun(req, res, next) {
         try {
-            const {login, type} = req.user[0];
+            const {login, type} = req.user;
             if(type === 'biegacz' || type === 'organizator') {
                 const isSigned = await db.query(isSignedQuery, [req.params.id, login, req.params.id, login]);
-                if (isSigned[0].volunter == 0 && isSigned[0].login == 0) {
+                if (isSigned[0].volunter == 0 && isSigned[0].runner == 0) {
                     await db.query(signupRunnerQuery, [req.params.id, login]);
                     res.send('Zostałeś zapisany jako biegacz.');
                 } else if (isSigned[0].volunter == 0 && isSigned[0].runner != 0) {
@@ -26,12 +26,12 @@ export default {
 
     async singupVoluntary(req, res, next) {
         try {
-            const {login, type} = req.user[0];
+            const {login, type} = req.user;
             if(type === 'biegacz' || type === 'organizator') {
                 const isSigned = await db.query(isSignedQuery, [req.params.id, login, req.params.id, login]);
                 if (isSigned[0].volunter == 0 && isSigned[0].runner == 0) {
                     await db.query(signupVolunteryQuery, [req.params.id, login]);
-                    res.send('Zostałeś zapisany jako biegacz.');
+                    res.send('Zostałeś zapisany jako wolontariusz.');
                 } else if (isSigned[0].volunter == 0 && isSigned[0].runner != 0) {
                     res.send('Jesteś już zapisany jako biegacz.')
                 } else {

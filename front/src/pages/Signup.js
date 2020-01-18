@@ -7,9 +7,9 @@ import Form from '../components/SignUpForm';
 import {submitForm} from "../components/Fetch";
 
 // Variables
-const url = 'http://127.0.0.1:3102/api/register';
+const url = 'http://127.0.0.1:3100/api/register';
 
-const validateForm = (e, changeState) => {
+const validateForm = async (e, changeState) => {
     let errors = [];
     const form = document.forms['signUpForm'];
     if(form['login'].value.length < 8)
@@ -46,7 +46,7 @@ const validateForm = (e, changeState) => {
         data.last_name = form['lastName'].value;
         data.birth_date = '1998-11-18';
         data.pass = form['password1'].value;
-        submitForm(url, data, changeState);
+        await submitForm(url, data, changeState);
         form['login'].value = '';
         form['firstName'].value = '';
         form['lastName'].value = '';

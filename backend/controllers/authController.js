@@ -1,6 +1,6 @@
 import db from '../settings/db';
-import bcrypt from 'bcrypt';
 import cookie from 'cookie';
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import {secret} from '../settings/environments';
 import {options} from '../settings/jwt';
@@ -9,9 +9,27 @@ const saltRounds = 10;
 
 export default{
         async loginUser(req, res, next){
-            try {
-                const token = await jwt.sign({log: req.user[0].login}, secret, options);
-                res.end();
+            try{
+                const token = await jwt.sign({log: req.user[0].login, typ: req.user[0].type}, secret, options);
+                res.setHeader('Set-Cookie', cookie.serialize('crosscountrytoken', token, {
+                    httpOnly: true,
+                    signed: true,
+                    sameSite: true,
+                    maxAge: 60 * 60 * 24 * 7,
+                    path: '/'
+                },
+                    'Access-Control-Allow-Origin', 'http://127.0.0.1:3000',
+                    'Access-Control-Allow-Credentials', 'true',
+                    'Access-Control-Allow-Methods', 'GET, POST',
+                    'Access-Control-Allow-Headers', 'Content-Type, Set-Cookie, *'
+                    ));
+
+                res.json({
+                   message: 'Zalogowano do serwisu!',
+                   success: true,
+                    type: req.user[0].login,
+                    loged: '1'
+                });
             }catch(err) {
                 console.error(err);
                 res.json({

@@ -4,10 +4,10 @@ import {showStatisticQuery, showProfileQuery, editProfileQuery} from '../setting
 export default {
     async showProfile(req,res,next){
        try{
-           const {login, type} = req.user[0];
+           const {login, type} = req.user;
            if(type=='organizator' || type == 'biegacz'){
-              const Profile = await db.query(showProfileQuery, [login]);
-              res.send(Profile);
+              const data = await db.query(showProfileQuery, [login]);
+              res.json(data[0]);
            }else{
                res.send('Brak dostępu..')
            }
@@ -42,17 +42,14 @@ export default {
 
     async showStatistic(req,res,next){
         try{
-            const {login, type} = req.user[0];
+            const {login, type} = req.user;
             if(type=='organizator' || type == 'biegacz') {
-                if (req.params.id == login) {
-                    const Statistic = await db.query(showStatisticQuery, [req.params.id]);
-                    res.send(Statistic);
+                    const stats = await db.query(showStatisticQuery, [login]);
+                    console.log(stats)
+                    res.send(stats);
                 } else {
                     res.send('Brak dostępu..');
                 }
-            }else{
-                res.send('Brak dostępu..');
-            }
         }catch(err){
             console.error(err);
             res.send('Nie udało się wyświetlić statystyk');

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5ea549e2-f899-442d-878b-23cd4805a606" name="Default Changelist" comment="" />
+    <list default="true" id="5ea549e2-f899-442d-878b-23cd4805a606" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/User.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +15,16 @@
         <option value="CSS File" />
         <option value="JavaScript File" />
       </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
     </option>
   </component>
   <component name="ProjectId" id="1WGQtQbVV9OaEAjTP5zuul7AqkN" />
@@ -32,12 +44,13 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/images" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/pages" />
       <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/styles/scss" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/images" />
     </key>
   </component>
   <component name="RunManager" selected="npm.npm start">
@@ -83,6 +96,12 @@
       <workItem from="1578904615467" duration="27850000" />
       <workItem from="1578992407911" duration="16785000" />
       <workItem from="1579035564198" duration="9105000" />
+      <workItem from="1579093331860" duration="17973000" />
+      <workItem from="1579137366472" duration="1248000" />
+      <workItem from="1579179441108" duration="3167000" />
+      <workItem from="1579249490471" duration="3227000" />
+      <workItem from="1579264077434" duration="3414000" />
+      <workItem from="1579362362716" duration="11183000" />
     </task>
     <servers />
   </component>
@@ -90,6 +109,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="141" y="54" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579104812845">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="141" y="54" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1366.741/1366.0.1920.1080@0.27.1366.741" timestamp="1579104812845" />
     <state x="503" y="221" width="558" height="390" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1578936101896">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -126,10 +149,10 @@
       <screen x="1366" y="0" width="1920" height="1080" />
     </state>
     <state x="1990" y="246" key="run.anything.popup/0.27.1366.741/1366.0.1920.1080@1366.0.1920.1080" timestamp="1578927602047" />
-    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1578941759310">
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1579375645219">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.27.1366.741/1366.0.1920.1080@0.27.1366.741" timestamp="1578941759310" />
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.27.1366.741/1366.0.1920.1080@0.27.1366.741" timestamp="1579375645219" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -137,6 +160,20 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/pages/Homepage.js</url>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/pages/Signin.js</url>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/pages/Profile.js</url>
+          <line>9</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/Result.js</url>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
