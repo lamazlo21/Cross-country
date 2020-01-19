@@ -33,7 +33,7 @@ const validateForm = async (e, changeState) => {
         form['password'].value = '';
         localStorage.setItem('loged', redirect.loged);
         localStorage.setItem('type', redirect.type);
-        if(redirect.succes) {
+        if(redirect.success) {
             window.location.href = 'http://127.0.0.1:3000/';
         }
     }

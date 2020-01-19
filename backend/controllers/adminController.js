@@ -8,7 +8,9 @@ import {
     selectUnacceptedRuns,
     getAllUsers,
     doesUserExistQuery,
-    findUserQuery
+    findUserQuery,
+    getFinishedRuns,
+    getRunUsers
 } from '../settings/queries';
 import bcrypt from 'bcrypt';
 
@@ -20,7 +22,7 @@ export default{
         try {
             const {start, end, city, length} = req.body;
             const {id} = req.params;
-            const {type} = req.user[0];
+            const {type} = req.user;
             if(type === 'admin') {
                 await db.query(editRouteQuery, [start, end, city, length, id]);
                 res.send('Trasa została zedytowana');
@@ -52,30 +54,42 @@ export default{
 
     async addUser(req, res, next){
         try{
-            const {type} = req.user[0];
+            const {type} = req.user;
             if(type === 'admin') {
-                const {login, name, surname, date, pass, type} = req.body;
+                const {login, first_name, last_name, birth_date, pass, type} = req.body;
                 const user = await db.query(doesUserExistQuery, [login]);
                 if(user.length == 0) {
                     const hashed = await bcrypt.hash(pass, saltRounds);
-                    await db.query(registerUserQuery, [login, name, surname, date, hashed, type]);
-                    res.send('Dodano Użytkownika');
+                    await db.query(registerUserQuery, [login, first_name, last_name, birth_date, hashed, type]);
+                    res.json({
+                        message: 'Dodano Użytkownika.',
+                        success: true
+                    })
                 }else{
-                    res.send('Użytkownik o podanym loginie już istnieje.D ');
+                    res.json({
+                        message: 'Użytkownik o podanym loginie już istnieje.',
+                        success: false
+                    })
                 }
             }else{
-                res.send('Brak dostępu.');
+                res.json({
+                    message: 'Brak dostępu.',
+                    success: false
+                })
             }
         }
         catch(err) {
             console.error(err);
-            res.send('Błąd! Nie udało dodać użytkownika');
+            res.json({
+                message: 'Wystąpił błąd.',
+                success: false
+            });
         }
     },
 
     async confirmRun(req, res, next){
         try{
-            const {type} = req.user[0];
+            const {type} = req.user;
             if(type === 'admin') {
                 await db.query(confirmRun, [req.params.id]);
                 res.send('Bieg został pomyślnie zatwierdzony');
@@ -91,7 +105,7 @@ export default{
 
     async removeUser(req, res, next){
         try{
-            const {type} = req.user[0];
+            const {type} = req.user;
             if(type === 'admin') {
                 const user = await db.query(findUserQuery, [req.params.login]);
                 if(user.length != 0) {
@@ -112,7 +126,7 @@ export default{
     
        async getUnacceptedRuns(req, res, next){
         try{
-            const {type} = req.user[0];
+            const {type} = req.user;
             if(type === 'admin') {
                 const runs = await db.query(selectUnacceptedRuns);
                 res.send(runs);
@@ -125,26 +139,58 @@ export default{
             console.error(err);
             res.send('Błąd! Nie udało się pobrać listy');
         }
+
+
+    },
+
+    async getFinishedRuns(req, res, next) {
+        try {
+            const {type} = req.user;
+            if (type === 'admin') {
+                const runs = await db.query(getFinishedRuns);
+                res.send(runs);
+            } else {
+                res.send('Brak dostępu.');
+            }
+        } catch (err) {
+            console.error(err);
+            res.send('Błąd! Nie udało się pobrać listy');
+        }
     },
 
     async getUsers(req, res, next){
         try{
-            const {type} = req.user[0];
+            const {type} = req.user;
             if(type === 'admin') {
                 const users = await db.query(getAllUsers);
+
                 res.send(users);
             }
             else{
                 res.send('Brak dostępu.');
             }
+        }
+        catch(err) {
+            console.error(err);
+            res.send('Błąd! Nie udało się pobrać listy');
+        }
+    },
 
+    async getRunUsers(req, res, next){
+        try{
+            const {type} = req.user;
+            if(type === 'admin') {
+                const users = await db.query(getRunUsers, [req.params.id]);
+                res.send(users);
+            }
+            else{
+                res.send('Brak dostępu.');
+            }
         }
         catch(err) {
             console.error(err);
             res.send('Błąd! Nie udało się pobrać listy');
         }
     }
-    
-    
 
 }

@@ -101,7 +101,12 @@
       <workItem from="1579179441108" duration="3167000" />
       <workItem from="1579249490471" duration="3227000" />
       <workItem from="1579264077434" duration="3414000" />
-      <workItem from="1579362362716" duration="11183000" />
+      <workItem from="1579362362716" duration="13030000" />
+      <workItem from="1579384503774" duration="1289000" />
+      <workItem from="1579386509095" duration="11112000" />
+      <workItem from="1579398438447" duration="4590000" />
+      <workItem from="1579441250932" duration="3658000" />
+      <workItem from="1579458772722" duration="10989000" />
     </task>
     <servers />
   </component>
@@ -145,6 +150,14 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="1088" height="149" key="GridCell.Tab.0.right/0.27.1366.741/1366.0.1920.1080@0.27.1366.741" timestamp="1579054806158" />
+    <state x="0" y="27" width="1366" height="741" maximized="true" key="dock-window-1" timestamp="1579462023628">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="0" y="27" width="1366" height="741" maximized="true" key="dock-window-1/0.27.1366.741/1366.0.1920.1080@1366.0.1920.1080" timestamp="1579462023628" />
+    <state x="0" y="27" width="1366" height="741" maximized="true" key="dock-window-2" timestamp="1579464785431">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="0" y="27" width="1366" height="741" maximized="true" key="dock-window-2/0.27.1366.741/1366.0.1920.1080@1366.0.1920.1080" timestamp="1579464785431" />
     <state x="1990" y="246" key="run.anything.popup" timestamp="1578927602047">
       <screen x="1366" y="0" width="1920" height="1080" />
     </state>
@@ -167,13 +180,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/pages/Profile.js</url>
-          <line>9</line>
+          <line>42</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/Result.js</url>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/App.js</url>
+          <line>69</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

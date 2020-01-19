@@ -5,7 +5,7 @@ export default {
     async signupRun(req, res, next) {
         try {
             const {login, type} = req.user;
-            if(type === 'biegacz' || type === 'organizator') {
+            if(type === 'biegacz') {
                 const isSigned = await db.query(isSignedQuery, [req.params.id, login, req.params.id, login]);
                 if (isSigned[0].volunter == 0 && isSigned[0].runner == 0) {
                     await db.query(signupRunnerQuery, [req.params.id, login]);
@@ -27,7 +27,7 @@ export default {
     async singupVoluntary(req, res, next) {
         try {
             const {login, type} = req.user;
-            if(type === 'biegacz' || type === 'organizator') {
+            if(type === 'biegacz'){
                 const isSigned = await db.query(isSignedQuery, [req.params.id, login, req.params.id, login]);
                 if (isSigned[0].volunter == 0 && isSigned[0].runner == 0) {
                     await db.query(signupVolunteryQuery, [req.params.id, login]);

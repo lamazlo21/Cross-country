@@ -1,22 +1,30 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
-// Functions
-import {fetchData} from "../components/Fetch";
+const removeUser = async (e, updateState) => {
+    e.preventDefault();
+    const login = e.target.parentElement.attributes.login.value;
+    const res = await fetch(`http://127.0.0.1:3100/admin/users/${login}`, {
+        method: "DELETE",
+        mode: "cors",
+        credentials: "include"
+    })
+    const data = await res.text();
+    updateState(data);
+}
 
-const User = ({url}) => {
-    const [data, updateData] =  useState({});
-
-    useEffect(() => {
-        fetchData(updateData, url);
-    }, []);
-
+const User = ({data}) => {
+    const [text, updateText] = useState('');
+    const date = data.date.split('T');
     return(
-      <div className={'user'}>
-          <p className={'user--text'}>{`Imie: ${data.name}`}</p>
-          <p className={'user--text'}>{`Nazwisko ${data.surname}`}</p>
-          <p className={'user--text'}>{`Data urodzenia ${data.date}`}</p>
-          <p className={'user--text'}>{`Typ: ${data.type}`}</p>
-          <a className={'user__button'} href={'/profile/stats'}><p className={'user--text user--button'}>Pokaż statystyki</p></a>
+      <div className={'user'} login={data.login}>
+          <p className={'user--text'}>{`Name: ${data.name}`}</p>
+          <p className={'user--text'}>{`Surname: ${data.surname}`}</p>
+          <p className={'user--text'}>{`Birth date: ${date[0]}`}</p>
+          <p className={'user--text'}>{`Type: ${data.type}`}</p>
+          {
+              (window.location.href === 'http://127.0.0.1:3000/admin/users'&&(<button onClick={(e) => removeUser(e, updateText)}>Remove</button>))
+          }
+          <p className={'user--text'}>{text}</p>
       </div>
     );
 }

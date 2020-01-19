@@ -1,56 +1,82 @@
 import db from '../settings/db';
-import {addRunQuery, editRunQuery, getRunOrganizer, showRunnersQuery} from '../settings/queries';
+import {addRunQuery, editRunQuery, getRunOrganizer, showRunnersQuery, showRunsQuery} from '../settings/queries';
 
 export default {
     async addRun(req, res, next) {
         try {
-            const {data_bieg, id_trasa, name} = req.body;
-            const {login, type} = req.user[0];
+            const {date, route, name} = req.body;
+            const {login, type} = req.user;
             if (type === 'organizator') {
-                await db.query(addRunQuery, [data_bieg, id_trasa, login, name]);
-                res.send('Bieg został wysłany do zatwierdzenia.');
+                await db.query(addRunQuery, [date, route, login, name]);
+                res.json({
+                    message: 'Bieg został wysłany do zatwierdzenia.',
+                    success: true
+                });
             } else {
-                res.send('Brak dostępu.');
+                res.json({
+                    message: 'Brak dostępu....',
+                    success: false
+                });
             }
         } catch (err) {
             console.error(err);
-            res.send('Błąd! Bieg nie został dodany.');
+            res.json({
+                message: 'Błąd! Bieg nie został dodany.',
+                success: false
+            });
+
         }
     },
 
     async editRun(req, res, next) {
         try {
             const {name, route, date} = req.body;
-            const {login, type} = req.user[0];
+            console.log(req.params.id)
+            const {login, type} = req.user;
             if (type == 'organizator') {
-                const organizer = await db.query(getRunOrganizer, [req.params.id]);
-                if (organizer[0].LOGIN_UZYTKOWNIK == login) {
                     await db.query(editRunQuery, [name, route, date, req.params.id]);
-                    res.send('Bieg został zedytowany');
-                } else {
-                    res.send('Brak dostępu..');
-                }
+                    res.json({
+                        message: 'Bieg został zedytowany.',
+                        success: true
+                    });
             } else {
-                res.send('Brak dostępu...');
+                res.json({
+                    message: 'Brak dostępu...',
+                    success: true
+                });
             }
         } catch (err) {
             console.error(err);
-            res.send('Błąd! Nie udało się edytować biegu');
+            res.json({
+                message: 'Błąd! Nie udało się edytować biegu.',
+                success: true
+            });
+        }
+    },
+
+    async showRuns(req, res, next) {
+        try {
+            const {login, type} = req.user;
+
+            if (type == 'organizator') {
+                    const runs = await db.query(showRunsQuery, [login]);
+                    res.send(runs);
+            }else{
+                res.send('Błąd...');
+            }
+        } catch (err) {
+            console.error(err);
+            res.send('Błąd! Nie udało się wyświetlić biegaczy');
         }
     },
 
     async showRunners(req, res, next) {
         try {
-            const {login, type} = req.user[0];
-
+            const {id} = req.params;
+            const {login, type} = req.user;
             if (type == 'organizator') {
-                const organizer = await db.query(getRunOrganizer, [req.params.id]);
-                if (organizer[0].LOGIN_UZYTKOWNIK == login) {
-                    const runners = await db.query(showRunnersQuery, [req.params.id]);
-                    res.send(runners);
-                } else {
-                    res.send('Błąd..');
-                }
+                const runs = await db.query(showRunnersQuery, [id]);
+                res.send(runs);
             }else{
                 res.send('Błąd...');
             }

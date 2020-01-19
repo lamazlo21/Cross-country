@@ -7,7 +7,7 @@ export default {
            const {login, type} = req.user;
            if(type=='organizator' || type == 'biegacz'){
               const data = await db.query(showProfileQuery, [login]);
-              res.json(data[0]);
+              res.send(data);
            }else{
                res.send('Brak dostępu..')
            }
@@ -20,22 +20,25 @@ export default {
     async editProfile(req,res,next){
         try{
             const {first_name, last_name, birth_date} = req.body;
-            const {login, type} = req.user[0];
-
+            const {login, type} = req.user;
             if(type=='organizator' || type == 'biegacz'){
-               if(req.params.id == login) {
                     await db.query(editProfileQuery, [first_name, last_name, birth_date, login]);
-                    res.send('Profil został zaktualizowany');
-
-                }else{
-                   res.send('Brak dostępu..')
-                }
+                    res.json({
+                        message: 'Profil został zaktualizowany.',
+                        success: true
+                    });
             }else{
-                res.send('Brak dostępu..')
+                res.json({
+                    message: 'Brak dostępu...',
+                    success: false
+                });
            }
        }catch(err){
            console.error(err);
-            res.send('Nie udało się edytować profilu');
+            res.json({
+                message: 'Nie udało się edytować profilu.',
+                success: false
+            });
        }
     },
 
@@ -45,7 +48,6 @@ export default {
             const {login, type} = req.user;
             if(type=='organizator' || type == 'biegacz') {
                     const stats = await db.query(showStatisticQuery, [login]);
-                    console.log(stats)
                     res.send(stats);
                 } else {
                     res.send('Brak dostępu..');

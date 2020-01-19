@@ -27,7 +27,7 @@ export default{
                 res.json({
                    message: 'Zalogowano do serwisu!',
                    success: true,
-                    type: req.user[0].login,
+                    type: req.user[0].type,
                     loged: '1'
                 });
             }catch(err) {

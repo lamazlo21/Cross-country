@@ -7,9 +7,11 @@ export default ()=>{
 
     api.post('/add', jwtAuth, organizer.addRun);
 
-    api.put('/:id/edit', jwtAuth, organizer.editRun);
+    api.put('/runs/:id', jwtAuth, organizer.editRun);
 
-    api.get('/:id/runners', jwtAuth, organizer.showRunners);
+    api.get('/runs', jwtAuth, organizer.showRuns);
+
+    api.get('/runs/:id', jwtAuth, organizer.showRunners);
 
     return api;
 }

@@ -9,7 +9,7 @@ export default ()=>{
 
     api.get('/stats', jwtAuth,homepageController.showStatistic);
 
-    api.put('/:id', jwtAuth,homepageController.editProfile);
+    api.put('/', jwtAuth,homepageController.editProfile);
 
   return api;
 };

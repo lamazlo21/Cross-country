@@ -6,7 +6,7 @@ const Errors = ({errors}) => {
             {
                 errors.map((data, index) => {
                     return(
-                        <li key={index} className={data.success?"success__item":"errors__item"}>
+                        <li key={index} className={data.success===true?"success__item":"errors__item"}>
                             <p className={"errors__item--text"}>{data.message}</p>
                         </li>
                     );

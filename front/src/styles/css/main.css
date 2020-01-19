@@ -16,6 +16,11 @@
   justify-content: center;
   width: 60%; }
 
+.run__button {
+  text-decoration: none;
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
 .run--text {
   color: #fff; }
 
@@ -103,7 +108,7 @@
   margin-bottom: 20px;
   background: rgba(223, 30, 30, 0.7); }
 
-.errors__item {
+.success__item {
   border-radius: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -118,12 +123,16 @@
 .user {
   display: flex;
   flex-direction: column;
-  align-items: center; }
+  align-items: center;
+  border: 3px solid #097454;
+  border-radius: 10px;
+  margin-top: 20px; }
 
 .user--text {
   color: #fff;
   font-size: 30px;
-  margin-top: 20px; }
+  margin-top: 20px;
+  margin-bottom: 20px; }
 
 .user__button {
   text-decoration: none;
@@ -164,6 +173,35 @@
 .stats {
   display: flex;
   justify-content: center; }
+
+.users {
+  display: flex;
+  justify-content: center; }
+
+.runs {
+  display: flex;
+  justify-content: center; }
+
+.admin {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.admin__button {
+  width: 20%;
+  margin-top: 40px;
+  text-decoration: none;
+  border: 3px solid #097454;
+  border-radius: 10px;
+  text-align: center; }
+
+.admin--text {
+  color: #fff;
+  font-size: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px; }
 
 * {
   margin: 0;
